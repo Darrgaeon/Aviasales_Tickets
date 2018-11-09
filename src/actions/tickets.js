@@ -29,14 +29,13 @@ export const loadTickets = (url) => dispatch => {
 
   axios.get(url)
     .then(res => {
-
       if (res.data) {
-        dispatch(ticketsSuccess(res.data));
+        dispatch(ticketsSuccess(res.data.tickets));
       } else {
         dispatch(ticketsFail("Ошибка при загрузке страницы..."));
       }
     })
-    .catch(e => dispatch(ticketsFail(defaultErrorMsg)));
+    .catch(() => dispatch(ticketsFail(defaultErrorMsg)));
 };
 
 
@@ -48,27 +47,29 @@ export const changeCurrency = (data, currency) => ({
 
 
 export const changeCurrencyTickets = (data, index) => dispatch => {
-  console.log("changeCurrencyTickets", data, index);
   let currency = "";
-  
-  if (index === 0) {
+
+  switch (index) {
+  case 0:
     currency = "RUB";
-  } else if (index === 1) {
+    break;
+  case 1:
     currency = "USD";
-  } else {
+    break;
+  case 2:
     currency = "EUR";
+    break;
   }
 
   dispatch(changeCurrency(data, currency));
 };
 
-export const isChecked = (event, dataToShow) => ({
+export const isChecked = (event, data) => ({
   type: TICKETS_CHANGE_CHECKBOXES,
-  payload: event,
-  dataToShow: dataToShow
+  payload: data,
+  event: event
 });
 
-export const changeCheckBoxes = (event, dataToShow) => dispatch => {
-  console.log("changeCheckBoxes", dataToShow);
-  dispatch(isChecked(event, dataToShow));
+export const changeCheckBoxes = (event, data) => dispatch => {
+  dispatch(isChecked(event, data));
 };

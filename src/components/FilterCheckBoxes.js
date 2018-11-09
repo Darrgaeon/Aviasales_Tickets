@@ -1,12 +1,9 @@
 import React from "react";
 import _ from "lodash";
-// import {filterCheckboxses} from "../constants/Default";
 
 class Checkbox extends React.Component {
   constructor(props) {
     super(props);
-
-
 
     this.isCheckedCheckBoxes = this.isCheckedCheckBoxes.bind(this);
     this.filterTicketsToShow = this.filterTicketsToShow.bind(this);
@@ -14,44 +11,58 @@ class Checkbox extends React.Component {
 
 
   isCheckedCheckBoxes(event, index, func, filterCheckBoxes, data) {
-    let checkBoxses = _.cloneDeep(filterCheckBoxes);
-    console.log("checkBoxses", checkBoxses);
-    // console.log("data", data);
-    checkBoxses[index].isChecked = event.target.checked;
+    let checkBoxes = _.cloneDeep(filterCheckBoxes);
+    checkBoxes[index].isChecked = event.target.checked;
 
-    let newData = this.filterTicketsToShow(checkBoxses, data);
+    if (index === 0) {
+      for (let i = 1; i < checkBoxes.length; i++) {
+        checkBoxes[i].isChecked = false;
+      }
+    } else {
+      for (let i = 1; i < checkBoxes.length; i++) {
+        if (checkBoxes[i].isChecked) {
+          checkBoxes[0].isChecked = false;
+        }
+      }
+    }
+
+    let newData = this.filterTicketsToShow(checkBoxes, data);
 
 
-    func(checkBoxses, newData);
+    func(checkBoxes, newData);
   }
 
-  filterTicketsToShow(newFilterCheckboxses, data) {
+  filterTicketsToShow(newFilterCheckboxes, data) {
     let dataClone = _.cloneDeep(data);
-    console.log("dataClone", dataClone);
-    // console.log("newFilterCheckboxses[i].filterFunction(item)", newFilterCheckboxses[0].filterFunction());
     let newData = [];
     let isAnyChecks = false;
-    for (let i = 0; i < newFilterCheckboxses.length; i++) {
-      if (newFilterCheckboxses[i].isChecked) {
+
+    for (let i = 0; i < newFilterCheckboxes.length; i++) {
+      if (newFilterCheckboxes[i].isChecked) {
         isAnyChecks = true;
-        newData = newData.concat(dataClone.tickets.filter(function (item) {
-          return newFilterCheckboxses[i].filterFunction(item);
+        newData = newData.concat(dataClone.filter(function (item) {
+          return newFilterCheckboxes[i].filterFunction(item);
         }));
       }
     }
-    console.log("newData11111", newData);
-    console.log("dataClone22222", dataClone);
 
     return isAnyChecks ? newData : dataClone;
   }
-
-
 
   render() {
     return (
       <div>
         <label className="checkbox">
-          <input type="checkbox" checked={this.props.isChecked} onClick={(event) => this.isCheckedCheckBoxes(event, this.props.checkBoxIndex, this.props.changeCheckBoxes, this.props.filterCheckBoxes, this.props.data )}/>
+          <input type="checkbox"
+            checked={this.props.isChecked}
+            onChange={(event) => this.isCheckedCheckBoxes(
+              event,
+              this.props.checkBoxIndex,
+              this.props.changeCheckBoxes,
+              this.props.filterCheckBoxes,
+              this.props.data
+            )}
+          />
           <span className="checkbox__text">{this.props.title}</span>
         </label>
       </div>
@@ -61,10 +72,9 @@ class Checkbox extends React.Component {
 
 class FilterCheckBoxes extends React.Component {
   render() {
-    console.log("89888888888888888888888",this.props.filterCheckBoxes[0].isChecked);
     return (
-      <div className="container-checkboxes-filters">
-        <p className="title">Количество пересадок</p>
+      <div className="checkboxes-filters">
+        <p className="checkboxes-filters__title">Количество пересадок</p>
         {this.props.filterCheckBoxes.map((item, index) => (
           <Checkbox
             title={item.title}

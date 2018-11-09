@@ -14,24 +14,6 @@ export const countTransfersFunc = (stops) => {
   }
 };
 
-// export const filterCheckboxses = [
-//   {title: "Все", filterFunction: (item) => item.stops <= 3},
-//   {title: "Без пересадок", filterFunction: (item) => item.stops === 0},
-//   {title: "1 пересадка", filterFunction: (item) => item.stops === 1},
-//   {title: "2 пересадки", filterFunction: (item) => item.stops === 2},
-//   {title: "3 пересадки", filterFunction: (item) => item.stops === 3}
-// ];
+export const nameCurrency = ["RUB", "USD", "EUR"];
+export const changeCoefficientCurrency = {"RUB": 1, "USD": 1/60, "EUR": 1/70};
 
-export const changeCurrency = [
-  {title: "RUB", 0: 1},
-  {title: "USD", 1: 1/60},
-  {title: "EUR", 2: 1/70}
-];
-
-export const test = {
-  0: 1,
-  1: 1/60,
-  2: 1/70
-};
-
-// export const countTransfers = ["Все", "Без пересадок", "1 пересадка", "2 пересадки", "3 пересадки"];

@@ -33,7 +33,6 @@ export function getTickets(state = initialState, action) {
     };
 
   case TICKETS_LOAD_SUCCESS:
-    console.log("TICKETS_LOAD_SUCCESS!!!!!!!!", action.payload);
     return {
       ...state,
       data: action.payload,
@@ -44,11 +43,9 @@ export function getTickets(state = initialState, action) {
   case TICKETS_LOAD_FAIL:
     return {...state,
       message: action.payload,
-      status: "not"
     };
 
   case TICKETS_CHANGE_CURRENCY:
-    console.log("TICKETS_CHANGE_CURRENCY!!!!!!!!", action.payload, action.currency);
     return{...state,
       dataToShow: action.payload,
       currency: action.currency
@@ -56,11 +53,9 @@ export function getTickets(state = initialState, action) {
 
 
   case TICKETS_CHANGE_CHECKBOXES:
-    console.log("TICKETS_CHANGE_CHECKBOXES!!!!!!!!", action.payload, action.dataToShow);
-    console.log("TICKETS_CHANGE_CHECKBOXES222222", action.dataToShow);
     return{...state,
-      filterCheckBoxes: action.payload,
-      dataToShow: action.dataToShow
+      dataToShow: action.payload,
+      filterCheckBoxes: action.event
     };
 
   default:

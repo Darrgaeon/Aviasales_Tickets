@@ -1,20 +1,56 @@
 @import "~bootstrap/dist/css/bootstrap.min.css"
 
+@font-face
+  font-family: 'Roboto Black'
+  src: url("./fonts/Roboto/Roboto-Black.ttf")
+
+@font-face
+  font-family: "Open Sans"
+  src: url("./fonts/Open Sans/Open-Sans.ttf")
+
+
 .header
   background: gainsboro
 
-  .block-filter-left
+  .logo
+    text-align: center
+    padding-top: 51px
+    margin-bottom: 51px
+
+  .block-filter
     display: flex
     flex-direction: column
     background-color: white
-    padding: 10px 10px 20px 10px
+    //padding: 10px 10px 20px 10px
+    padding: 15px
     margin-top: 16px
+    //width: 242px
 
-    .title
-      font-size: 18px
+    .currency
+      //padding: 15px
 
-    .container-checkboxes-filters
+      .currency__title
+        font-size: 12px
+        text-transform: uppercase
+        font-family: "Open Sans Regular", sans-serif
+        margin-bottom: 13px
+
+      .currency_button
+        background: red
+        //width: 68px
+        height: 40px
+        width: 68px
+        font-size: 12px
+        text-transform: uppercase
+        font-family: "Open Sans Regular", sans-serif
+
+    .checkboxes-filters
       margin-top: 30px
+
+      .checkboxes-filters__title
+        font-size: 12px
+        text-transform: uppercase
+        font-family: "Open Sans Regular", sans-serif
 
       .checkbox input
         position: absolute

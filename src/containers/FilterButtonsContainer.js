@@ -1,15 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import {changeCurrencyTickets} from "../actions/tickets";
 import FilterButtons from "../components/FilterButtons";
+import * as PropTypes from "prop-types";
 
 class FilterButtonsContainer extends React.Component {
   render() {
     return (
       <FilterButtons
         changeCurrencyTickets={this.props.changeCurrencyTickets}
-        data={this.props.tickets.data}
+        data={this.props.tickets.dataToShow}
         status={this.props.tickets.status}
       />
     );
@@ -26,3 +27,9 @@ const mapDispatchToProps = dispatch =>
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterButtonsContainer);
+
+FilterButtonsContainer.propsTypes = {
+  changeCurrencyTickets: PropTypes.func.isRequired,
+  dataToShow: PropTypes.array.isRequired,
+  status: PropTypes.string.isRequired,
+};

@@ -1,12 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import {changeCheckBoxes} from "../actions/tickets";
 import FilterCheckBoxes from "../components/FilterCheckBoxes";
+import * as PropTypes from "prop-types";
 
 class FilterButtonsContainer extends React.Component {
   render() {
-    console.log("this.props.filterCheckboxses222222222222222222", this.props.tickets.filterCheckBoxes);
     return (
       <FilterCheckBoxes
         filterCheckBoxes={this.props.tickets.filterCheckBoxes}
@@ -27,3 +27,9 @@ const mapDispatchToProps = dispatch =>
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterButtonsContainer);
+
+FilterButtonsContainer.propsTypes = {
+  filterCheckBoxes: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+  changeCheckBoxes: PropTypes.func.isRequired,
+};
