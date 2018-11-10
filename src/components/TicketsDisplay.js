@@ -1,7 +1,15 @@
 import React from "react";
 import {API, countTransfersFunc, changeCoefficientCurrency} from "../constants/Default";
-import {Button} from "reactstrap";
 import moment from "moment";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faRubleSign, faEuroSign, faDollarSign} from "@fortawesome/free-solid-svg-icons";
+
+const currencyFontAwesome = {
+  "RUB": faRubleSign,
+  "USD": faEuroSign,
+  "EUR": faDollarSign
+};
+
 
 class TicketsDisplay extends React.Component {
 
@@ -18,25 +26,37 @@ class TicketsDisplay extends React.Component {
           return (
             <div key={index} className="custom-ticket">
               <div className="company">
-                <h3>Turkish Airlines</h3>
-                <Button color="primary">
-                  <a href="#" className={"linkPrices"}>
-                    {`Купить за ${Math.ceil(item.price * changeCoefficientCurrency[this.props.currency])} ${this.props.currency}`}
+                <div className="company-logo">
+                  <img src={require("../img/company-logo.png")} />
+                </div>
+                <button className="company-button">
+                  <a href="#" className="linkPrices">
+                    Купить <br/>
+                    {`за ${Math.ceil(item.price * changeCoefficientCurrency[this.props.currency])} `}
+                    <FontAwesomeIcon className="icon-awesome" icon={currencyFontAwesome[this.props.currency]} />
                   </a>
-                </Button>
+                </button>
               </div>
-              <div className="departure">
-                <div className="departure-time">{item.departure_time}</div>
-                <div className="departure-destination">{item.origin}, {item.origin_name}</div>
-                <div className="departure-date">{moment(item.departure_date, "DD.MM.YY").locale("ru").format("D MMM YYYY, dd")}</div>
-              </div>
-              <div className="stops">
-                <p>{countTransfersFunc(item.stops)}</p>
-              </div>
-              <div className="arrival">
-                <div className="arrival-time">{item.arrival_time}</div>
-                <div className="arrival-destination">{item.destination}, {item.destination_name}</div>
-                <div className="arrival-date">{moment(item.arrival_date, "DD.MM.YY").locale("ru").format("D MMM YYYY, dd")}</div>
+              <div className="tickets-info">
+                <div className="time-and-transfers">
+                  <div className="departure-time">{item.departure_time}</div>
+                  <div className="transfers">
+                    <div className="stops">{countTransfersFunc(item.stops)}</div>
+                    <img src={require("../img/plane.png")} />
+                  </div>
+                  <div className="arrival-time">{item.arrival_time}</div>
+                </div>
+
+                <div className="departure-and-arrival">
+                  <div className="departure-site-and-date">
+                    <div className="departure-destination">{item.origin}, {item.origin_name}</div>
+                    <div className="departure-date">{moment(item.departure_date, "DD.MM.YY").locale("ru").format("D MMM YYYY, dd")}</div>
+                  </div>
+                  <div className="arrival-site-and-date">
+                    <div className="arrival-destination">{item.destination_name}, {item.destination}</div>
+                    <div className="arrival-date">{moment(item.arrival_date, "DD.MM.YY").locale("ru").format("D MMM YYYY, dd")}</div>
+                  </div>
+                </div>
               </div>
             </div>
           );

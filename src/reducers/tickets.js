@@ -12,6 +12,11 @@ const initialState = {
   data: [],
   dataToShow: [],
   currency: "RUB",
+  filterButtons: [
+    {currency: "RUB", classButton: "currency__button__active"},
+    {currency: "USD", classButton: "currency__button"},
+    {currency: "EUR", classButton: "currency__button"}
+  ],
   filterCheckBoxes: [
     {title: "Все", filterFunction: (item) => item.stops <= 3, isChecked: true},
     {title: "Без пересадок", filterFunction: (item) => item.stops === 0, isChecked: false},
@@ -48,7 +53,8 @@ export function getTickets(state = initialState, action) {
   case TICKETS_CHANGE_CURRENCY:
     return{...state,
       dataToShow: action.payload,
-      currency: action.currency
+      currency: action.currency,
+      filterButtons: action.classButtons
     };
 
 

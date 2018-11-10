@@ -39,14 +39,15 @@ export const loadTickets = (url) => dispatch => {
 };
 
 
-export const changeCurrency = (data, currency) => ({
+export const changeCurrency = (data, currency, classButtons) => ({
   type: TICKETS_CHANGE_CURRENCY,
   payload: data,
-  currency: currency
+  currency: currency,
+  classButtons: classButtons
 });
 
 
-export const changeCurrencyTickets = (data, index) => dispatch => {
+export const changeCurrencyTickets = (data, index, classButtons) => dispatch => {
   let currency = "";
 
   switch (index) {
@@ -61,8 +62,9 @@ export const changeCurrencyTickets = (data, index) => dispatch => {
     break;
   }
 
-  dispatch(changeCurrency(data, currency));
+  dispatch(changeCurrency(data, currency, classButtons));
 };
+
 
 export const isChecked = (event, data) => ({
   type: TICKETS_CHANGE_CHECKBOXES,

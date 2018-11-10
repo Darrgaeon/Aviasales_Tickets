@@ -12,6 +12,7 @@ class FilterButtonsContainer extends React.Component {
         changeCurrencyTickets={this.props.changeCurrencyTickets}
         data={this.props.tickets.dataToShow}
         status={this.props.tickets.status}
+        filterButtons={this.props.tickets.filterButtons}
       />
     );
   }
@@ -32,4 +33,5 @@ FilterButtonsContainer.propsTypes = {
   changeCurrencyTickets: PropTypes.func.isRequired,
   dataToShow: PropTypes.array.isRequired,
   status: PropTypes.string.isRequired,
+  filterButtons: PropTypes.array.isRequired
 };

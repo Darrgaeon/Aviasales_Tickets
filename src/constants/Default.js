@@ -14,6 +14,5 @@ export const countTransfersFunc = (stops) => {
   }
 };
 
-export const nameCurrency = ["RUB", "USD", "EUR"];
 export const changeCoefficientCurrency = {"RUB": 1, "USD": 1/60, "EUR": 1/70};
 

@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 
+
 class Checkbox extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +9,6 @@ class Checkbox extends React.Component {
     this.isCheckedCheckBoxes = this.isCheckedCheckBoxes.bind(this);
     this.filterTicketsToShow = this.filterTicketsToShow.bind(this);
   }
-
 
   isCheckedCheckBoxes(event, index, func, filterCheckBoxes, data) {
     let checkBoxes = _.cloneDeep(filterCheckBoxes);
