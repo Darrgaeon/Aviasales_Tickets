@@ -38,8 +38,7 @@ export function getTickets(state = initialState, action) {
     };
 
   case TICKETS_LOAD_SUCCESS:
-    return {
-      ...state,
+    return {...state,
       data: action.payload,
       dataToShow: action.payload,
       status: "ok"
@@ -51,15 +50,14 @@ export function getTickets(state = initialState, action) {
     };
 
   case TICKETS_CHANGE_CURRENCY:
-    return{...state,
+    return {...state,
       dataToShow: action.payload,
       currency: action.currency,
       filterButtons: action.classButtons
     };
 
-
   case TICKETS_CHANGE_CHECKBOXES:
-    return{...state,
+    return {...state,
       dataToShow: action.payload,
       filterCheckBoxes: action.event
     };
